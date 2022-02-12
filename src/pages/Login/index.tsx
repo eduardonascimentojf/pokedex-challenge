@@ -1,9 +1,10 @@
-import { Conteiner } from './styles';
+import { Text } from "../../components/Text";
+import { Conteiner } from "./styles";
 
 export function Login() {
-  return (
-    <Conteiner>
-      <p>Login</p>
-    </Conteiner>
-  );
+     return (
+          <Conteiner>
+               <Text tag="h2">Login</Text>
+          </Conteiner>
+     );
 }
