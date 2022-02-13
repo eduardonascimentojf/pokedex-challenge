@@ -1,6 +1,8 @@
+import { Modal } from "@mui/material";
 import { useState, useEffect } from "react";
 import { padDigits } from "../../utils/tools";
-import { Conteiner } from "./styles";
+import { ModalDetailPokemon } from "../ModalDetailPokemon";
+import * as S from "./styles";
 interface propsType {
      name: string;
      id: number;
@@ -9,6 +11,9 @@ interface propsType {
 }
 export function CardPokemon(props: propsType) {
      const [color, setColor] = useState("");
+     const [open, setOpen] = useState(false);
+     const handleOpen = () => setOpen(true);
+     const handleClose = () => setOpen(false);
      useEffect(() => {
           switch (props.type) {
                case "poison":
@@ -30,7 +35,7 @@ export function CardPokemon(props: propsType) {
                     setColor("181, 185, 196");
                     break;
                case "ground":
-                    setColor("245, 119, 6)");
+                    setColor("245, 119, 6");
                     break;
                case "electric":
                     setColor("242, 203, 85");
@@ -62,20 +67,29 @@ export function CardPokemon(props: propsType) {
                case "steel":
                     setColor("76, 145, 178");
                     break;
-
                default:
                     setColor("116, 143, 201");
           }
      }, []);
 
      return (
-          <Conteiner backgroundColor={color}>
-               <div>
-                    <p># {padDigits(props.id)}</p>
-                    <p>{props.name}</p>
-                    <span>{props.type}</span>
-               </div>
-               <img src={props.img} alt={props.name} />
-          </Conteiner>
+          <>
+               <S.Conteiner backgroundColor={color} onClick={handleOpen}>
+                    <div>
+                         <S.NumberID># {padDigits(props.id)}</S.NumberID>
+                         <S.Name>{props.name}</S.Name>
+                         <S.Type backgroundColor={color}>{props.type}</S.Type>
+                    </div>
+                    <img src={props.img} alt={props.name} />
+               </S.Conteiner>
+               <Modal
+                    open={open}
+                    onClose={handleClose}
+                    aria-labelledby="modal-modal-title"
+                    aria-describedby="modal-modal-description"
+               >
+                    <ModalDetailPokemon id={props.id} />
+               </Modal>
+          </>
      );
 }

@@ -1,15 +1,36 @@
 import styled from "styled-components";
 
 export const Conteiner = styled.div`
-     flex: 1;
+     ul {
+          justify-content: center;
+          padding: 10px;
+          li {
+               button,
+               div {
+                    color: ${(props) => props.theme.colorTitle};
+               }
+               .Mui-selected {
+                    background-color: ${(props) =>
+                         props.theme.backgroundSecondary} !important;
+               }
+               button:hover {
+                    background-color: ${(props) =>
+                         props.theme.background} !important;
+               }
+          }
+     }
 `;
 export const Wrapper = styled.div`
-     margin: 20px auto;
-     border-radius: 5px;
-     border: 1px solid ${(props) => props.theme.colorTitle};
-     padding: 1rem;
+     width: 100%;
      display: grid;
      grid-template-columns: 1fr 1fr 1fr 1fr;
+     margin: 20px auto;
+     border-radius: 15px;
+     border: 1px solid ${(props) => props.theme.grey};
+     padding: 1rem;
+     gap: 16px 10px;
+`;
 
-     gap: 8px;
+export const Text = styled.p`
+     color: ${(props) => props.theme.grey};
 `;

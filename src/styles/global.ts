@@ -11,6 +11,11 @@ body{
      background-color: ${(props) => props.theme.backgroundBody};
      color: ${(props) => props.theme.color};
      font-family: ${(props) => props.theme.font.fontFamily};
+     padding: 35px 0;
+}
+h1, h2, h3, h4, h5, h6 {
+  font-weight: bold !important;
+  font-family: "Montserrat", sans-serif !important;
 }
 a{
      text-decoration: none;
