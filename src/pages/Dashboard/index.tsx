@@ -24,7 +24,6 @@ export function Dashboard() {
      useEffect(() => {
           async function getUrl() {
                const tetstst = await formatUrl(page);
-               console.log(tetstst);
                setUrl(tetstst);
           }
           getUrl();
@@ -47,7 +46,6 @@ export function Dashboard() {
 
           getItems();
      }, [, url]);
-     console.log(pokemon);
      return (
           <S.Conteiner>
                <S.BackButton to="/">
