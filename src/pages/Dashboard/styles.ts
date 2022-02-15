@@ -1,5 +1,5 @@
 import styled from "styled-components";
-
+import { Link } from "react-router-dom";
 export const Conteiner = styled.div`
      ul {
           justify-content: center;
@@ -30,7 +30,15 @@ export const Wrapper = styled.div`
      padding: 1rem;
      gap: 16px 10px;
 `;
-
 export const Text = styled.p`
      color: ${(props) => props.theme.grey};
+`;
+export const BackButton = styled(Link)`
+     display: flex;
+     align-items: center;
+     color: ${(props) => props.theme.primarry};
+     :hover {
+          opacity: 0.7;
+          transition: 0.3s;
+     }
 `;

@@ -1,10 +1,13 @@
 import { Text } from "../../components/Text";
-import { Conteiner } from "./styles";
-
+import { BackButton } from "./styles";
+import { ArrowBackIosNew } from "@mui/icons-material";
 export function Login() {
      return (
-          <Conteiner>
+          <>
+               <BackButton to="/">
+                    <ArrowBackIosNew /> Voltar
+               </BackButton>
                <Text tag="h2">Login</Text>
-          </Conteiner>
+          </>
      );
 }

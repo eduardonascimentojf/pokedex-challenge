@@ -1,6 +1,7 @@
 import { ButtonLink } from "../../components/ButtonLink";
 import { Text } from "../../components/Text";
 import { Conteiner } from "./styles";
+
 export function Home() {
      return (
           <Conteiner>
