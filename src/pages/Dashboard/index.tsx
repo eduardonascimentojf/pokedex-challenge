@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { Pagination } from "@mui/material";
 import { ArrowBackIosNew } from "@mui/icons-material";
 import { CardPokemon } from "../../components/CardPokemon";
 import { Text } from "../../components/Text";
@@ -9,55 +8,75 @@ import { formatTotalPages, formatUrl } from "../../utils/tools";
 import * as T from "../../types";
 
 import { useSelector, useDispatch } from "react-redux";
-import { setPokemon } from "../../store/slices/pokemonSlice";
+import { resetPokemon, setPokemon } from "../../store/slices/pokemonSlice";
+import { setUrl } from "../../store/slices/urlSlice";
+
 import { RootState } from "../../store/store";
+import { Search } from "../../components/Search";
+import { Pagination } from "@mui/material";
 
 export function Dashboard() {
      const dispatch = useDispatch();
      const pokemon = useSelector((state: RootState) => state.pokemon.data);
+     const url = useSelector((state: RootState) => state.apiUrl.url);
      const [page, setPage] = useState(1);
      const [totalPages, setTotalPages] = useState(1);
-     const [url, setUrl] = useState("/pokemon?offset=0&limit=20");
      const handleChange = (page: number) => {
           setPage(page);
      };
      useEffect(() => {
           async function getUrl() {
-               const tetstst = await formatUrl(page);
-               setUrl(tetstst);
+               const urlFormat = await formatUrl(page);
+               dispatch(setUrl(urlFormat));
           }
           getUrl();
      }, [page]);
 
      useEffect(() => {
           async function getItems() {
-               const { data } = await api.get(url);
-
-               const resp = await Promise.all(
-                    data.results.map((item: T.IPokemonModal) =>
-                         api.get(item.url)
-                    )
-               );
-               const format: any = resp.map((req) => req.data);
-               const allPage = await formatTotalPages(data.count);
-               setTotalPages(allPage);
-               dispatch(setPokemon(format));
+               try {
+                    const { data } = await api.get(url);
+                    if (!data.results && data) {
+                         setTotalPages(1);
+                         const arrayPokemon = [];
+                         arrayPokemon.push(data);
+                         dispatch(setPokemon(arrayPokemon));
+                    } else {
+                         const resp = await Promise.all(
+                              data.results.map((item: T.IPokemonModal) =>
+                                   api.get(item.url)
+                              )
+                         );
+                         const format: any = resp.map((req) => req.data);
+                         const allPage = await formatTotalPages(data.count);
+                         setTotalPages(allPage);
+                         dispatch(setPokemon(format));
+                    }
+               } catch (error) {
+                    dispatch(resetPokemon());
+                    setPage(0);
+                    setTotalPages(0);
+               }
           }
-
           getItems();
      }, [, url]);
      return (
           <S.Conteiner>
-               <S.BackButton to="/">
-                    <ArrowBackIosNew /> Voltar
-               </S.BackButton>
-               <Text tag="h2">Dashboard</Text>
-               <S.Text>
-                    Search for Pokémon by name or using the National Pokédex
-                    number
-               </S.Text>
+               <S.Header>
+                    <div>
+                         <S.BackButton to="/">
+                              <ArrowBackIosNew /> Voltar
+                         </S.BackButton>
+                         <Text tag="h2">Dashboard</Text>
+                         <S.Text>
+                              Procure Pokémon pelo nome ou usando o número
+                              National Pokédex
+                         </S.Text>
+                    </div>
+                    <Search />
+               </S.Header>
                <S.Wrapper>
-                    {pokemon.length > 0 &&
+                    {pokemon.length > 0 ? (
                          pokemon.map((item, index) => (
                               <CardPokemon
                                    key={item.id}
@@ -67,7 +86,10 @@ export function Dashboard() {
                                    type={item.types[0].type.name}
                                    arrayPosition={index}
                               />
-                         ))}
+                         ))
+                    ) : (
+                         <p>Nenhuma busaca encontrada</p>
+                    )}
                </S.Wrapper>
                <Pagination
                     onChange={(e, page) => handleChange(page)}

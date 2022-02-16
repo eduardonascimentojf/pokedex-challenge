@@ -6,9 +6,9 @@ import { App } from "./App";
 import { GlobalStyle } from "./styles/global";
 
 import { ThemeProvider } from "styled-components";
-import { dark } from "./styles/Theme";
+import { dark, ligth } from "./styles/Theme";
+import store, { RootState } from "./store/store";
 import { Provider } from "react-redux";
-import store from "./store/store";
 
 ReactDOM.render(
      <React.StrictMode>

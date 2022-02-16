@@ -14,7 +14,6 @@ export const dark = {
      danger: "#d50606",
      warning: "#eab000",
      info: "#17a2b8",
-
      font: {
           fontFamily: "'Roboto Slab', serif;",
           regular: 300,
@@ -24,12 +23,19 @@ export const dark = {
 export const ligth = {
      primarry: "#55a8d3",
      white: "#dbdbdb",
-     color: "blue",
-     colorTitle: "blue",
-     backgroundBody: "#161929",
+     color: "#002502",
+     colorTitle: "#000500",
      background: "#16192F",
+     backgroundSecondary: "#0d0d90",
+     backgroundBody: "#161929",
      backgroundSiderBar: "#0d0d19",
+     borderColor: "#e3e3e3",
      grey: "#9799a8",
+     black: "#000",
+     success: "#155724",
+     danger: "#d50606",
+     warning: "#eab000",
+     info: "#17a2b8",
      font: {
           fontFamily: "'Roboto Slab', serif;",
           regular: 300,

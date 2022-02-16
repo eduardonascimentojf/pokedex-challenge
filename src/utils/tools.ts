@@ -50,7 +50,7 @@ export function colorByType(value: string) {
           case "fighting":
                return "235, 73, 113";
           case "rock":
-               return "111, 110, 120";
+               return "62, 28, 0";
           case "ghost":
                return "133, 113, 190";
           case "ice":

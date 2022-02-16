@@ -31,3 +31,7 @@ export interface IPokemonModal extends IPokemon {
           }
      ];
 }
+
+export interface IUrl {
+     url: string | number;
+}

@@ -37,8 +37,15 @@ export const BackButton = styled(Link)`
      display: flex;
      align-items: center;
      color: ${(props) => props.theme.primarry};
+     width: min-content;
      :hover {
           opacity: 0.7;
           transition: 0.3s;
      }
+`;
+
+export const Header = styled.div`
+     display: flex;
+     align-items: center;
+     justify-content: space-between;
 `;

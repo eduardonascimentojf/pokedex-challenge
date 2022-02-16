@@ -2,8 +2,8 @@ import { IPokemonModal } from "./../../types/index";
 import { createSlice } from "@reduxjs/toolkit";
 type PokemonState = IPokemonModal[];
 const initialState: PokemonState = [];
-const stock = createSlice({
-     name: "stoke",
+const pokemon = createSlice({
+     name: "pokemon",
      initialState: {
           data: initialState,
      },
@@ -11,7 +11,10 @@ const stock = createSlice({
           setPokemon(state, value) {
                state.data = value.payload;
           },
+          resetPokemon(state) {
+               state.data = [];
+          },
      },
 });
-export const { setPokemon } = stock.actions;
-export default stock.reducer;
+export const { setPokemon, resetPokemon } = pokemon.actions;
+export default pokemon.reducer;
